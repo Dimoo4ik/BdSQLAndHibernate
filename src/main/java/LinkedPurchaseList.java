@@ -3,12 +3,14 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "purchase_list")
+@Table(name = "linked_purchase_list")
 public class LinkedPurchaseList {
 
-
     @Id
-
+    @Column(name = "student_id")
+    private int studentId;
+    @Column(name = "course_id")
+    private int courseId;
     @Column(name = "student_name")
     private String studentName;
     @Column(name = "course_name")
@@ -17,6 +19,21 @@ public class LinkedPurchaseList {
     @Column(name = " subscription_date")
     private Date subscriptionDate;
 
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
 
     public String getStudentName() {
         return studentName;
@@ -50,9 +67,12 @@ public class LinkedPurchaseList {
         this.subscriptionDate = subscriptionDate;
     }
 
+    @Override
     public String toString() {
-        return "PurcharList{" +
-                "studentName='" + studentName + '\'' +
+        return "LinkedPurchaseList{" +
+                "studentId=" + studentId +
+                ", courseId=" + courseId +
+                ", studentName='" + studentName + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", price=" + price +
                 ", subscriptionDate=" + subscriptionDate +

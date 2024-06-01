@@ -10,26 +10,18 @@ public class Course {
     private int id;
     private String name;
     private int duration;
-    @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "enum")
-    private CourseType type;
+    /*@Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "enum",nullable = false)
+    private CourseType type;*/
+
     private String description;
     @Column(name = "teacher_id")
-
     private int teacherId;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Teacher teacher;
     @Column(name = "students_count", nullable = true)
     private Integer studentsCount;
     private int price;
     @Column(name = "price_per_hour")
     private float pricePerHour;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "subscriptions",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "course_id")})
-    private List<Student> students;
 
     public int getId() {
         return id;
@@ -55,13 +47,13 @@ public class Course {
         this.duration = duration;
     }
 
-    public CourseType getType() {
+    /*public CourseType getType() {
         return type;
     }
 
     public void setType(CourseType type) {
         this.type = type;
-    }
+    }*/
 
     public String getDescription() {
         return description;
@@ -71,19 +63,19 @@ public class Course {
         this.description = description;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public int getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public int getStudentsCount() {
+    public Integer getStudentsCount() {
         return studentsCount;
     }
 
-    public void setStudentsCount(int studentsCount) {
+    public void setStudentsCount(Integer studentsCount) {
         this.studentsCount = studentsCount;
     }
 
@@ -103,23 +95,15 @@ public class Course {
         this.pricePerHour = pricePerHour;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
     @Override
     public String toString() {
         return "Course{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", duration=" + duration +
-                ", type=" + type +
+//                ", type=" + type +
                 ", description='" + description + '\'' +
-                ", teacherId=" + teacher +
+                ", teacherId=" + teacherId +
                 ", studentsCount=" + studentsCount +
                 ", price=" + price +
                 ", pricePerHour=" + pricePerHour +
